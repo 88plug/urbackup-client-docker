@@ -1,21 +1,9 @@
-############################################################
-# Dockerfile to run urbackup-client
-# Based on Ubuntu Image
-############################################################
-
 FROM ubuntu:trusty
 
-RUN	apt-get update && \
-	apt-get -y upgrade && \
-	apt-get -y install wget && \
-	cd /root && \
-	wget -O - https://hndl.urbackup.org/Client/2.2.6/urbackup-client-2.2.6.tar.gz | tar zxf - && \
-	cd urbackup* && \
-	./configure --enable-headless --without-mail && \
-	make -j 4 && \
-	make install && \
-	cd /root/ && \
-	rm -rf urbackup*
+RUN TF=`mktemp` && \
+    apt-get update && \
+    apt-get install -y wget && \
+	wget "https://hndl.urbackup.org/Client/2.2.6/UrBackup%20Client%20Linux%202.2.6.sh" -O $TF && sudo sh $TF; rm $TF
 
 # Ports to expose
 EXPOSE 35621
