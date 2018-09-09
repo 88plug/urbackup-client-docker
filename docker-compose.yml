@@ -4,13 +4,11 @@ services:
   urbackup:
     build: .
     container_name: "urbackup-client"
+    hostname: "${HOSTNAME}"
     restart: 'always'
-    ports: 
+    ports:
      - 35621:35621
-     - 35622:35622
+     - 35622:35622/udp
      - 35623:35623
     volumes:
-     - ../app:/usr/backup
-
-
-
+     - /docker:/usr/backup
