@@ -11,4 +11,4 @@ services:
      - 35622:35622/udp
      - 35623:35623
     volumes:
-     - /:/usr/backup
+     - /docker:/usr/backup
